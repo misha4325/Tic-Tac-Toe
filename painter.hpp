@@ -1,9 +1,9 @@
 #pragma once
-#include "point.hpp"
-#include "board.hpp"
 
-class Painter {
+#include "abstract_painter.hpp"
+
+class Painter: public AbstractPainter {
 public:
-    void DrawBoard(const Board& board);  // Рисует игровое поле
-    void DrawText(Point position, const char* text);  // Рисует текст в указанной позиции
+   virtual void DrawImage(Point topLeft, Point bottomRight, char** image);
+   virtual void WriteText(Point position, char* text);
 };
