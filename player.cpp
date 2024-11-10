@@ -1,17 +1,20 @@
 #include "player.hpp"
 
-    Player::Player(CellState symbol){}
-    CellState Player::GetSymbol() {CellState test;return test;}
+Player::Player(CellState symbol) : _symbol(symbol) {}
 
-    // Оператор присваивания
-    Player& Player::operator=(const Player &other) {
+CellState Player::GetSymbol() const {
+    return _symbol;
+}
+
+Player& Player::operator=(const Player& other) {
     if (this != &other) {
         _symbol = other._symbol;
     }
     return *this;
 }
 
-    // Оператор сравнения
-    bool Player::operator==(const Player &other) const {
-    return _symbol==other._symbol;
+bool Player::operator==(const Player& other) const {
+    return _symbol == other._symbol;
 }
+
+// Здесь можно реализовать операторы ввода/вывода для CellState, если это требуется

@@ -1,9 +1,22 @@
 #pragma once
+#include "cell.hpp"
+#include <string>
 
-#include "abstract_painter.hpp"
-
-class Painter: public AbstractPainter {
+class Player {
+    CellState _symbol;  // Крестик или нолик
 public:
-   virtual void DrawImage(Point topLeft, Point bottomRight, char** image);
-   virtual void WriteText(Point position, char* text);
+    Player() = default;
+    explicit Player(CellState symbol);
+
+    CellState GetSymbol() const;
+
+    // Оператор присваивания
+    Player& operator=(const Player& other);
+
+    // Оператор сравнения
+    bool operator==(const Player& other) const;
 };
+
+// Операторы ввода и вывода
+std::istream& operator>>(std::istream& in, CellState& cell);
+std::ostream& operator<<(std::ostream& out, const CellState& cell);
