@@ -17,9 +17,10 @@ LIB_FIGURE = $(LIB_DIR)/libCell.a
 LIB_CLEANER = $(LIB_DIR)/libPainter.a
 LIB_GAME = $(LIB_DIR)/libPlayer.a
 LIB_POINT = $(LIB_DIR)/libPoint.a
+LIB_GAME_ENGINE = $(LIB_DIR)/libGameEngine.a
 
 # Все библиотеки
-LIBRARIES = $(LIB_FIELD) $(LIB_FIGURE) $(LIB_CLEANER) $(LIB_GAME) $(LIB_POINT)
+LIBRARIES = $(LIB_FIELD) $(LIB_FIGURE) $(LIB_CLEANER) $(LIB_GAME) $(LIB_POINT) $(LIB_GAME_ENGINE)
 
 # Исходные файлы
 MAIN = $(SRC_DIR)/main.cpp
@@ -30,6 +31,7 @@ OBJ_FIGURE = $(SRC_DIR)/cell.o
 OBJ_CLEANER = $(SRC_DIR)/painter.o
 OBJ_GAME = $(SRC_DIR)/player.o
 OBJ_POINT = $(SRC_DIR)/point.o
+OBJ_GAME_ENGINE = $(SRC_DIR)/game_engine.o
 OBJ_MAIN = $(SRC_DIR)/main.o
 
 # Цель по умолчанию
@@ -37,34 +39,34 @@ all: Tic-Tac-Toe
 
 # Основное приложение
 Tic-Tac-Toe: $(OBJ_MAIN) $(LIBRARIES)
-	$(CC) -o Tic-Tac-Toe $(OBJ_MAIN) -L$(LIB_DIR) -L$(SFML_LIB) -lBoard -lCell -lPainter -lPlayer -lPoint -lsfml-graphics -lsfml-window -lsfml-system
+	$(CC) -o Tic-Tac-Toe $(OBJ_MAIN) -L$(LIB_DIR) -L$(SFML_LIB) -lBoard -lCell -lPainter -lPlayer -lPoint -lGameEngine -lsfml-graphics -lsfml-window -lsfml-system
 
 # Компиляция main.cpp
 $(OBJ_MAIN): $(MAIN)
 	$(CC) $(CFLAGS) $(MAIN) -o $(OBJ_MAIN)
 
-# Библиотека Field
+# Библиотека Board
 $(LIB_FIELD): $(OBJ_FIELD)
 	$(AR) $(ARFLAGS) $(LIB_FIELD) $(OBJ_FIELD)
 
 $(OBJ_FIELD): $(SRC_DIR)/board.cpp $(INCLUDE_DIR)/board.hpp
 	$(CC) $(CFLAGS) $(SRC_DIR)/board.cpp -o $(OBJ_FIELD)
 
-# Библиотека Figure
+# Библиотека Cell
 $(LIB_FIGURE): $(OBJ_FIGURE)
 	$(AR) $(ARFLAGS) $(LIB_FIGURE) $(OBJ_FIGURE)
 
 $(OBJ_FIGURE): $(SRC_DIR)/cell.cpp $(INCLUDE_DIR)/cell.hpp
 	$(CC) $(CFLAGS) $(SRC_DIR)/cell.cpp -o $(OBJ_FIGURE)
 
-# Библиотека Cleaner
+# Библиотека Painter
 $(LIB_CLEANER): $(OBJ_CLEANER)
 	$(AR) $(ARFLAGS) $(LIB_CLEANER) $(OBJ_CLEANER)
 
 $(OBJ_CLEANER): $(SRC_DIR)/painter.cpp $(INCLUDE_DIR)/painter.hpp
 	$(CC) $(CFLAGS) $(SRC_DIR)/painter.cpp -o $(OBJ_CLEANER)
 
-# Библиотека Game
+# Библиотека Player
 $(LIB_GAME): $(OBJ_GAME)
 	$(AR) $(ARFLAGS) $(LIB_GAME) $(OBJ_GAME)
 
@@ -77,6 +79,13 @@ $(LIB_POINT): $(OBJ_POINT)
 
 $(OBJ_POINT): $(SRC_DIR)/point.cpp $(INCLUDE_DIR)/point.hpp
 	$(CC) $(CFLAGS) $(SRC_DIR)/point.cpp -o $(OBJ_POINT)
+
+# Библиотека GameEngine
+$(LIB_GAME_ENGINE): $(OBJ_GAME_ENGINE)
+	$(AR) $(ARFLAGS) $(LIB_GAME_ENGINE) $(OBJ_GAME_ENGINE)
+
+$(OBJ_GAME_ENGINE): $(SRC_DIR)/game_engine.cpp $(INCLUDE_DIR)/game_engine.hpp
+	$(CC) $(CFLAGS) $(SRC_DIR)/game_engine.cpp -o $(OBJ_GAME_ENGINE)
 
 # Удаление временных файлов
 clean:
