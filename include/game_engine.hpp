@@ -3,19 +3,57 @@
 #include "player.hpp"
 #include "point.hpp"
 
+/**
+ * @brief Class for managing the game logic.
+ */
 class GameEngine {
-    Board _board;
-    Player _player1;
-    Player _player2;
-    Player* _currentPlayer;  // Указатель на текущего игрока
+    Board _board;          ///< Game board.
+    Player _player1;       ///< First player.
+    Player _player2;       ///< Second player.
+    Player* _currentPlayer; ///< Pointer to the current player.
 
 public:
+    /**
+     * @brief Default constructor.
+     */
     GameEngine();
-    void Init();                    // Инициализация игры
-    void Run();                     // Основной цикл игры
-    bool MakeMove(const Point& position);  // Совершить ход на поле
-    void SwitchPlayer();            // Переход хода к следующему игроку
-    bool IsGameOver() const;        // Проверка завершения игры
-    Player* GetWinner() const;      // Возвращает победителя (если есть)
-    void Render();                  // Отрисовка игрового поля и интерфейса
+
+    /**
+     * @brief Initializes the game.
+     */
+    void Init();
+
+    /**
+     * @brief Runs the game loop.
+     */
+    void Run();
+
+    /**
+     * @brief Makes a move on the board.
+     * @param position Coordinates of the move.
+     * @return True if the move was successful, false otherwise.
+     */
+    bool MakeMove(const Point& position);
+
+    /**
+     * @brief Switches to the next player's turn.
+     */
+    void SwitchPlayer();
+
+    /**
+     * @brief Checks if the game is over.
+     * @return True if the game is over, false otherwise.
+     */
+    bool IsGameOver() const;
+
+    /**
+     * @brief Gets the winner of the game.
+     * @return Pointer to the winning player, or nullptr if no winner.
+     */
+    Player* GetWinner() const;
+
+    /**
+     * @brief Renders the game board and UI.
+     */
+    void Render();
 };

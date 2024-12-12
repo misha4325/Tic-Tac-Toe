@@ -1,0 +1,119 @@
+\chapter{Tic-\/\+Tac-\/\+Toe Classic}
+\hypertarget{md_readme}{}\label{md_readme}\index{Tic-\/Tac-\/Toe Classic@{Tic-\/Tac-\/Toe Classic}}
+\label{md_readme_autotoc_md0}%
+\Hypertarget{md_readme_autotoc_md0}%
+\hypertarget{md_readme_autotoc_md1}{}\doxysection{\texorpdfstring{Описание проекта\+:}{Описание проекта\+:}}\label{md_readme_autotoc_md1}
+Проект {\ttfamily Tic-\/\+Tac-\/\+Toe Classic} представляет собой цифровую версию классической настольной игры "{}Крестики-\/Нолики"{}. Игра реализована с использованием объектно-\/ориентированного программирования и предназначена для двух игроков. Проект включает в себя базовую логику игры, проверку победы и ничьи, а также простой графический интерфейс для взаимодействия с пользователем. Это удобная платформа для игры на одном устройстве.
+
+5-\/я лабораторная работа В рамках данной работы были внесены следующие изменения\+:
+
+Подключена библиотека SFML (Simple and Fast Multimedia Library), которая используется для графического отображения игрового поля и взаимодействия с пользователем. Использована SFML в файле game\+\_\+engine.\+cpp для создания окна игры и отрисовки игрового поля, а также для обработки ввода от пользователей. Создана папка libs, в которой находятся статические библиотеки проекта. Это позволяет организовать код и использовать различные части программы как отдельные библиотеки.\hypertarget{md_readme_autotoc_md2}{}\doxysection{\texorpdfstring{Новые типы данных\+:}{Новые типы данных\+:}}\label{md_readme_autotoc_md2}
+\hypertarget{md_readme_autotoc_md3}{}\doxysubsection{\texorpdfstring{Point}{Point}}\label{md_readme_autotoc_md3}
+Структура для работы с координатами на поле.
+
+
+\begin{DoxyItemize}
+\item {\ttfamily x} — координата по горизонтали.
+\item {\ttfamily y} — координата по вертикали.
+\end{DoxyItemize}
+
+{\bfseries{Описание\+:}} Представляет положение на игровом поле, используется для указания мест, где игроки могут ставить свои крестики или нолики.\hypertarget{md_readme_autotoc_md4}{}\doxysubsection{\texorpdfstring{Cell\+State}{Cell\+State}}\label{md_readme_autotoc_md4}
+Перечисление, описывающее возможные состояния клеток на игровом поле.
+
+
+\begin{DoxyItemize}
+\item {\ttfamily Empty} — пустая клетка.
+\item {\ttfamily Cross} — клетка с крестиком.
+\item {\ttfamily Circle} — клетка с ноликом.
+\end{DoxyItemize}
+
+{\bfseries{Описание\+:}} Используется для хранения текущего состояния каждой клетки на поле и определения, какой символ был помещён.\hypertarget{md_readme_autotoc_md5}{}\doxysubsection{\texorpdfstring{Board}{Board}}\label{md_readme_autotoc_md5}
+Класс, представляющий игровое поле.
+
+
+\begin{DoxyItemize}
+\item {\ttfamily \+\_\+grid} — двумерный массив 3x3, представляющий клетки игрового поля.
+\end{DoxyItemize}
+
+Методы\+:
+
+
+\begin{DoxyItemize}
+\item {\ttfamily Reset()} — очистка поля.
+\item {\ttfamily Set\+Move()} — установка символа (крестик или нолик) в указанную клетку.
+\item {\ttfamily Get\+Cell\+State()} — возвращает состояние клетки по заданной позиции.
+\item {\ttfamily Is\+Full()} — проверяет, заполнено ли поле.
+\item {\ttfamily Check\+Win()} — проверяет, есть ли победитель.
+\end{DoxyItemize}
+
+{\bfseries{Описание\+:}} Управляет состоянием игрового поля и реализует логику игры, включая проверку победы или ничьи.\hypertarget{md_readme_autotoc_md6}{}\doxysubsection{\texorpdfstring{Player}{Player}}\label{md_readme_autotoc_md6}
+Класс игрока.
+
+
+\begin{DoxyItemize}
+\item {\ttfamily \+\_\+symbol} — символ игрока (крестик или нолик).
+\end{DoxyItemize}
+
+Методы\+:
+
+
+\begin{DoxyItemize}
+\item {\ttfamily Get\+Symbol()} — возвращает символ игрока (крестик или нолик).
+\end{DoxyItemize}
+
+{\bfseries{Описание\+:}} Представляет каждого игрока в игре и управляет его символом.\hypertarget{md_readme_autotoc_md7}{}\doxysubsection{\texorpdfstring{Game\+Engine}{Game\+Engine}}\label{md_readme_autotoc_md7}
+Класс, управляющий логикой игры.
+
+
+\begin{DoxyItemize}
+\item {\ttfamily \+\_\+board}— объект игрового поля.
+\item {\ttfamily \+\_\+player1}, -\/ {\ttfamily \+\_\+player2} — объекты игроков.
+\item {\ttfamily \+\_\+current\+Player} — текущий игрок, совершающий ход.
+\end{DoxyItemize}
+
+Методы\+:
+
+
+\begin{DoxyItemize}
+\item {\ttfamily Init()} — инициализирует игру.
+\item {\ttfamily Make\+Move()} — делает ход на поле.
+\item {\ttfamily Switch\+Player()} — переключает активного игрока.
+\item {\ttfamily Is\+Game\+Over()} — проверяет, закончилась ли игра.
+\item {\ttfamily Get\+Winner()} — возвращает победителя (если есть).
+\end{DoxyItemize}
+
+{\bfseries{Описание\+:}} Этот класс управляет всей игровой логикой, определяет ход игры и взаимодействие между игроками и игровым полем.\hypertarget{md_readme_autotoc_md8}{}\doxysubsection{\texorpdfstring{Painter}{Painter}}\label{md_readme_autotoc_md8}
+Класс, отвечающий за визуализацию игры.
+
+Методы\+:
+
+
+\begin{DoxyItemize}
+\item {\ttfamily Draw\+Board()} — отрисовывает игровое поле.
+\item {\ttfamily Draw\+Text()} — отображает текстовые сообщения на экране (например, победа или ничья).
+\end{DoxyItemize}
+
+{\bfseries{Описание\+:}} Отвечает за графическое отображение игрового процесса, включая отрисовку поля и вывод информации.\hypertarget{md_readme_autotoc_md9}{}\doxysection{\texorpdfstring{Зависимости}{Зависимости}}\label{md_readme_autotoc_md9}
+Для сборки проекта необходимо иметь установленные\+:
+
+
+\begin{DoxyItemize}
+\item {\ttfamily g++} -\/ компилятор С++, рекомендуемая версия 10 или выше
+\item {\ttfamily make} -\/ система автоматизации сборки, рекомендуемая версия 4 или выше
+\end{DoxyItemize}\hypertarget{md_readme_autotoc_md10}{}\doxysection{\texorpdfstring{Сборка}{Сборка}}\label{md_readme_autotoc_md10}
+
+\begin{DoxyEnumerate}
+\item Откройте консоль;
+\item Склонируйте проект;
+\item Перейдите в папку проекта;
+\item Выполните сборку.
+\end{DoxyEnumerate}
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{git\ clone\ https://github.com/misha4325/Tic-\/Tac-\/Toe/tree/lab-\/02}
+\DoxyCodeLine{cd\ TIC-\/TAC-\/TOE}
+\DoxyCodeLine{make}
+
+\end{DoxyCode}
+ 
