@@ -24,6 +24,7 @@ LIBRARIES = $(LIB_FIELD) $(LIB_FIGURE) $(LIB_CLEANER) $(LIB_GAME) $(LIB_POINT) $
 
 # Исходные файлы
 MAIN = $(SRC_DIR)/main.cpp
+TEST_MAIN = $(SRC_DIR)/test_main.cpp
 
 # Объектные файлы
 OBJ_FIELD = $(SRC_DIR)/board.o
@@ -33,6 +34,7 @@ OBJ_GAME = $(SRC_DIR)/player.o
 OBJ_POINT = $(SRC_DIR)/point.o
 OBJ_GAME_ENGINE = $(SRC_DIR)/game_engine.o
 OBJ_MAIN = $(SRC_DIR)/main.o
+OBJ_TEST_MAIN = $(SRC_DIR)/test_main.o
 
 # Цель по умолчанию
 all: Tic-Tac-Toe
@@ -44,6 +46,14 @@ Tic-Tac-Toe: $(OBJ_MAIN) $(LIBRARIES)
 # Компиляция main.cpp
 $(OBJ_MAIN): $(MAIN)
 	$(CC) $(CFLAGS) $(MAIN) -o $(OBJ_MAIN)
+
+# Тесты
+tests: $(OBJ_TEST_MAIN) $(LIBRARIES)
+	$(CC) -o tests $(OBJ_TEST_MAIN) -L$(LIB_DIR) -L$(SFML_LIB) -lBoard -lCell -lPainter -lPlayer -lPoint -lGameEngine
+	@echo "Тесты собраны: выполните ./tests для запуска"
+
+$(OBJ_TEST_MAIN): $(TEST_MAIN)
+	$(CC) $(CFLAGS) $(TEST_MAIN) -o $(OBJ_TEST_MAIN)
 
 # Библиотека Board
 $(LIB_FIELD): $(OBJ_FIELD)
@@ -89,4 +99,4 @@ $(OBJ_GAME_ENGINE): $(SRC_DIR)/game_engine.cpp $(INCLUDE_DIR)/game_engine.hpp
 
 # Удаление временных файлов
 clean:
-	rm -f $(SRC_DIR)/*.o Tic-Tac-Toe $(LIBRARIES)
+	rm -f $(SRC_DIR)/*.o Tic-Tac-Toe tests $(LIBRARIES)
